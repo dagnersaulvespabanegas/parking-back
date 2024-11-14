@@ -1,0 +1,35 @@
+
+#import "entitypage.graphqls"
+#import "registro.graphqls"
+
+type Pago {
+  pagoId: ID!
+  registro: Registro!
+  tiempoTranscurrido: String!
+  totalPagar: Float!
+}
+
+input NewPago {
+  registro: RegistroInput!
+  tiempoTranscurrido: String!
+  totalPagar: Float!
+}
+
+input UpdatedPago {
+  registro: RegistroInput
+  tiempoTranscurrido: String
+  totalPagar: Float
+}
+
+extend type Mutation {
+  createPago(pago: NewPago!): Pago!
+  updatePago(pagoId: ID!, updateRequest: UpdatedPago!): Pago!
+  deletePago(pagoId: ID!): Boolean!
+}
+
+extend type Query {
+  getPagos(page: Int!, size: Int!): PagoPage
+  getPago(pagoId: ID!): Pago!
+}
+
+

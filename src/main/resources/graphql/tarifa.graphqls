@@ -1,0 +1,43 @@
+#import "entitypage.graphqls"
+
+type Tarifa {
+  tarifaId: ID!
+  tipoVehiculo: String!
+  precio_hora: Float!
+  precio_dia: Float!
+  precio_lavado: Float!
+}
+
+input NewTarifa {
+  tipoVehiculo: String!
+  precio_hora: Float!
+  precio_dia: Float!
+  precio_lavado: Float!
+}
+
+input TarifaInput {
+  tarifaId: ID!
+  tipoVehiculo: String!
+  precio_hora: Float!
+  precio_dia: Float!
+  precio_lavado: Float!
+}
+
+input UpdatedTarifa {
+  tipoVehiculo: String
+  precio_hora: Float
+  precio_dia: Float
+  precio_lavado: Float
+}
+
+extend type Query {
+  getTarifas(page: Int!, size: Int!): TarifaPage
+  getTarifa(tipoVehiculo: String!): Tarifa!
+  getAllTarifas: [Tarifa]
+}
+
+extend type Mutation {
+  createTarifa(tarifa: NewTarifa!): Tarifa!
+  updateTarifa(tarifaId:ID!, updateRequest: UpdatedTarifa!): Tarifa!
+  deleteTarifa(tarifaId: ID!): Boolean
+}

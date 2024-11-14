@@ -1,0 +1,44 @@
+#import "entitypage.graphqls"
+
+
+enum Status {
+  ADENTRO
+  AFUERA
+}
+
+
+type Vehiculo {
+  vehiculoId: ID!
+  placa: String!
+  color: String
+  abonado: Abonado       
+  estado: Status      
+}
+
+input NewVehiculo {
+  placa: String!
+  color: String
+  abonado: NewAbonado 
+  estado: Status      
+   
+}
+
+input UpdatedVehiculo {
+  vehiculoId: ID!
+  placa: String
+  color: String
+  abonado: UpdatedAbonado     
+     
+}
+
+extend type Query {
+  getVehiculos(page: Int!, size: Int!): VehiculoPage
+  getVehiculo(placa: String!): Vehiculo!
+  getAllVehiculos: [Vehiculo]
+}
+
+extend type Mutation {
+  createVehiculo(vehiculo: NewVehiculo!): Vehiculo!
+  updateVehiculo(vehiculoId: ID! , updateRequest: UpdatedVehiculo!): Vehiculo!
+  deleteVehiculo(vehiculoId: ID!): Boolean
+}

@@ -1,0 +1,54 @@
+#import "pageinfo.graphqls"
+
+type UserPage {
+  pageInfo: PageInfo!
+  items: [User!]!
+}
+
+type PlanPage {
+  pageInfo: PageInfo!     
+  items: [Plan!]!        
+}
+
+
+type AbonadoPage {
+  pageInfo: PageInfo!    
+  items: [Abonado!]!      
+}
+
+
+type PlazaPage {
+  pageInfo: PageInfo!     
+  items: [Plaza!]!       
+}
+
+type RegistroPage {
+  pageInfo: PageInfo!     
+  items: [Registro!]!     
+}
+
+type TarifaPage {
+  pageInfo: PageInfo!      
+  items: [Tarifa!]!       
+}
+
+type VehiculoPage {
+  pageInfo: PageInfo!     
+  items: [Vehiculo!]!      
+}
+
+type PagoPage {
+  pageInfo: PageInfo!    
+  items: [Pago!]!       
+}
+
+type DetallePlanPage {
+  pageInfo: PageInfo!    
+  items: [DetallePlan!]!       
+}
+
+type SmartContractPage {
+  pageInfo: PageInfo!    
+  items: [SmartContract!]!       
+}
+

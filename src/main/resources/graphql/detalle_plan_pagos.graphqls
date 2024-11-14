@@ -1,0 +1,33 @@
+#import "entitypage.graphqls"
+
+type DetallePlan {
+  detalleId: ID!
+  monto: Float!
+  fechaPago: String! 
+
+}
+
+input NewDetallePlan {
+  planId: ID!
+  monto: Float!
+  fechaPago: String!  
+}
+
+input UpdatedDetallePlan {
+  detalleId: ID!
+  monto: Float
+  fechaPago: String
+}
+
+extend type Query {
+  getDetallesDePlanDePagos(page: Int!, size: Int!): DetallePlanPage
+  getDetalleDePlanDePagos(detalleId: ID!): DetallePlan!
+}
+
+extend type Mutation {
+  createDetalleDePlanDePagos(detalle: NewDetallePlan!): DetallePlan!
+  updateDetalleDePlanDePagos(detalleUpdate: UpdatedDetallePlan!): DetallePlan!
+  deleteDetalleDePlanDePagos(detalleId: ID!): Boolean
+}
+
+

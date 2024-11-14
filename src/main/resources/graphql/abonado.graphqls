@@ -1,0 +1,39 @@
+#import "entitypage.graphqls"
+
+type Abonado {
+  abonadoId: ID!
+  nombre: String!
+  cedula: String!
+  placa: String!
+  direccion: String!
+  celular: String!
+}
+
+input NewAbonado {
+  nombre: String!
+  cedula: String!
+  placa: String!
+  direccion: String!
+  celular: String!
+}
+
+input UpdatedAbonado {
+  abonadoId: ID!
+  nombre: String
+  cedula: String
+  placa: String
+  direccion: String
+  celular: String
+}
+
+extend type Query {
+  getAbonados(page: Int!, size: Int!): AbonadoPage
+  getAbonado(abonadoId: ID!): Abonado!
+  getAllAbonados: [Abonado]
+}
+
+extend type Mutation {
+  createAbonado(abonado: NewAbonado!): Abonado!
+  updateAbonado(inputAbonado: UpdatedAbonado!): Abonado!
+  deleteAbonado(abonadoId: ID!): Boolean
+}

@@ -1,0 +1,48 @@
+#import "entitypage.graphqls"
+
+type Plaza {
+  plazaId: ID!
+  numero : Int!
+  estado: PlazaStatus!
+  largo: Float!
+  ancho: Float!
+}
+
+enum PlazaStatus {
+  OCUPADA
+  DISPONIBLE
+}
+
+input NewPlaza {
+  numero: Int!
+  estado: PlazaStatus!
+  largo: Float!
+  ancho: Float!
+}
+
+input PlazaInput {
+  plazaId: ID!
+  numero: Int!
+  estado: PlazaStatus!
+  largo: Float!
+  ancho: Float!
+}
+
+input UpdatedPlaza {
+  plazaId: ID!
+  estado: PlazaStatus
+  largo: Float
+  ancho: Float
+}
+
+extend type Query {
+  getPlazas(page: Int!, size: Int!): PlazaPage
+  getPlaza(plazaId: ID!): Plaza!
+  getAllPlazas: [Plaza]
+}
+
+extend type Mutation {
+  createPlaza(plaza: NewPlaza!): Plaza!
+  updatePlaza(updatePlaza: UpdatedPlaza!): Plaza!
+  deletePlaza(plazaId: ID!): Boolean
+}

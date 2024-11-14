@@ -1,0 +1,55 @@
+#import "entitypage.graphqls"
+
+type Registro {
+  registroId: ID!
+  placa: String!
+  tipoVehiculo: Tarifa!
+  hora: String!
+  fecha: String!
+  tipo: Tipo_Registro!
+  plaza : Plaza
+}
+
+enum Tipo_Registro {
+  ENTRADA
+  SALIDA
+}
+
+input NewRegistro {
+  placa: String!
+  tipoVehiculo: TarifaInput!  # Referencia a un tipo de Tarifa por su ID
+  hora: String!
+  fecha: String!
+  tipo: Tipo_Registro!
+  plaza:PlazaInput
+}
+
+input UpdatedRegistro {
+  registroId: ID!
+  placa: String
+  tipoVehiculo: TarifaInput  # Referencia a un tipo de Tarifa por su ID
+  hora: String
+  fecha: String
+  tipo: Tipo_Registro
+}
+
+input RegistroInput {
+  placa: String!
+  tipoVehiculo: TarifaInput!  # Asegúrate de definir TarifaInput
+  hora: String!
+  fecha: String!
+  tipo: Tipo_Registro!  # Asegúrate de que Tipo_Registro esté definido
+}
+
+extend type Query {
+  getRegistros(page: Int!, size: Int!): RegistroPage
+   getAllRegistros: [Registro]
+  getRegistro(registroId: ID!): Registro!
+   getRegistroByPlaca(placa: String!): Registro!
+}
+
+extend type Mutation {
+  createRegistro(registro: NewRegistro!): Registro!
+  updateRegistro(registroId: ID! , updateRequest: UpdatedRegistro!): Registro!
+  deleteRegistro(registroId: ID!): Boolean
+}

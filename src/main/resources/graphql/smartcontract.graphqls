@@ -1,0 +1,24 @@
+#import "entitypage.graphqls"
+
+type SmartContract {
+  smartId: ID!
+  trxHash : String!
+}
+
+
+input NewSmartContract {
+  trxHash: String!
+
+}
+
+
+
+extend type Query {
+  getContracts(page: Int!, size: Int!): SmartContractPage
+
+}
+
+extend type Mutation {
+  createSmartContract(contract: NewSmartContract!): SmartContract!
+
+}

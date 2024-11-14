@@ -1,0 +1,60 @@
+#import "entitypage.graphqls"
+# Tipo Plan
+type Plan {
+  planId: ID!
+  abonado: Abonado!
+  montoSemanaMes: Float!
+  duracion: Int!
+  tipo: PlanTipo!
+  fechaInicio: String!
+  montoTotal: Float!
+  detalle: [DetallePlan]!  
+}
+
+# Enum para los tipos de plan
+enum PlanTipo {
+  SEMANAL
+  MENSUAL
+}
+
+
+input NewPlan {
+  abonado: UpdatedAbonado! 
+  montoSemanaMes: Float!
+  duracion: Int!
+  tipo: PlanTipo!
+  fechaInicio: String!
+  montoTotal: Float!
+  detalle: [DetalleInput]! 
+}
+
+
+input UpdatedPlan {
+  planId: ID!
+  abonado: UpdatedAbonado  
+  montoSemanaMes: Float
+  duracion: Int
+  tipo: PlanTipo
+  fechaInicio: String
+  montoTotal: Float
+  detalle: [DetalleInput] 
+}
+
+
+input DetalleInput {
+  detalleId: Int!
+  fechaPago: String!
+  monto: Float!
+}
+
+# Consultas y Mutaciones
+extend type Query {
+  getPlanes(page: Int!, size: Int!): PlanPage
+  getPlan(planId: ID!): Plan!
+}
+
+extend type Mutation {
+  createPlan(plan: NewPlan!): Plan!
+  updatePlan(updatePlan: UpdatedPlan!): Plan!
+  deletePlan(planId: ID!): Boolean
+}
